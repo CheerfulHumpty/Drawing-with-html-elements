@@ -63,21 +63,6 @@
             transition: 1s;
             background-color: rgb(91, 255, 195);
         }
-        #erase{
-            position: absolute;
-            top: 0%;
-            left: 17%;
-            padding-left: 20px;
-            padding-right: 20px;
-            padding-top: 8px;
-            padding-bottom: 11px;
-            width: 30px;
-            height: 30px;
-            color: rgb(255, 255, 255);
-        }
-        #erase:hover{
-            cursor: pointer;
-        }
         #shape{
             position: absolute;
             top: 0.95%;
@@ -97,7 +82,6 @@
         <option style="cursor: pointer;" value="circle">circle</option>
     </select>
     <button id="button" onclick="myfunction()">Clear</button>
-    <img id="erase" src="eraser-icon.svg" alt="">
 </body>
 <script>
     let x,y,z,mouseX,mouseY,iserase;
@@ -107,16 +91,6 @@
     let button = document.getElementById("button")
     let timecontrol = 0
     let shape = document.getElementById("shape")
-    let doingit = document.getElementById("erase")
-    doingit.addEventListener("click",()=>{
-        iserase = !iserase
-        if(iserase){
-            doingit.style.backgroundColor = "rgb(152, 150, 150)"
-        }
-        else{
-             doingit.style.backgroundColor = "aliceblue"
-        }
-    })
     main.addEventListener("mouseup",()=>{
         turnon = false
     })
