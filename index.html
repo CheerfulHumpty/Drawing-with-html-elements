@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draw Some Shit</title>
+    <style>
+        body{
+            background-color: aliceblue;
+        }
+        #main{
+            position: absolute;
+            left: 0%;
+            top: 6%;
+            width: 100% ;
+            height: 94%;
+            max-width: 100%;
+            max-height: 95%;
+            background-color: rgb(34, 34, 34);
+        }
+        .content{
+            position:absolute;
+            width: 20px;
+            height: 20px;
+        }
+        .content2{
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            border-radius: 15px 15px 15px 15px;
+        }
+        .content3{
+            position:absolute;
+            width: 0;
+	        height: 0;
+	        border-left: 12.5px solid transparent;
+	        border-right: 12.5px solid transparent;
+	        border-bottom: 25px solid blue;
+        }
+        .content4{
+            position:absolute;
+            width: 0;
+	        height: 0;
+	        border-left: 15.5px solid transparent;
+	        border-right: 15.5px solid transparent;
+	        border-bottom: 26.5px solid blue;
+            transform: rotate(60deg);
+        }
+        #button{
+            position: absolute;
+            text-align: center;
+            top: 0.9%;
+            left: 10%;
+            width: 90px;
+            height: 32px;
+            border : 4px solid rgb(60, 124, 97);
+            color: rgb(61, 67, 67);
+            border-radius: 10px 10px 10px 10px ;
+            font-style: cursive;
+        }
+        button:hover{
+            cursor: pointer;
+            transition: 1s;
+            background-color: rgb(91, 255, 195);
+        }
+        #erase{
+            position: absolute;
+            top: 0%;
+            left: 17%;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 8px;
+            padding-bottom: 11px;
+            width: 30px;
+            height: 30px;
+            color: rgb(255, 255, 255);
+        }
+        #erase:hover{
+            cursor: pointer;
+        }
+        #shape{
+            position: absolute;
+            top: 0.95%;
+            height: 30px;
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="main"></div>
+    <select name="shapes" id="shape">
+        <option style="cursor: pointer;" value="mixed">Mixed</option>
+        <option style="cursor: pointer;" value="triangle">triangle</option>
+        <option style="cursor: pointer;" value="inverted-triangle">inverted-triangle</option>
+        <option style="cursor: pointer;" value="square">square</option>
+        <option style="cursor: pointer;" value="circle">circle</option>
+    </select>
+    <button id="button" onclick="myfunction()">Clear</button>
+    <img id="erase" src="eraser-icon.svg" alt="">
+</body>
+<script>
+    let x,y,z,mouseX,mouseY,iserase;
+    iserase = false;
+    let main = document.getElementById("main")
+    let turnon = false
+    let button = document.getElementById("button")
+    let timecontrol = 0
+    let shape = document.getElementById("shape")
+    let doingit = document.getElementById("erase")
+    doingit.addEventListener("click",()=>{
+        iserase = !iserase
+        if(iserase){
+            doingit.style.backgroundColor = "rgb(152, 150, 150)"
+        }
+        else{
+             doingit.style.backgroundColor = "aliceblue"
+        }
+    })
+    main.addEventListener("mouseup",()=>{
+        turnon = false
+    })
+    main.addEventListener("mousedown",()=>{
+        turnon = true
+    })
+    let bounds = main.getBoundingClientRect()
+    main.addEventListener("mousemove",(event)=>{
+        if(turnon){
+            let timenow  =  new Date().getTime()
+            if(timenow-timecontrol>25){
+                let shapeselector = Math.floor(Math.random()*4)
+                console.log("shapeselector : "+shapeselector)
+                let p = document.createElement("p")
+                main.append(p)
+                mouseX = event.x
+                mouseY = event.y
+                p.style.left = (mouseX-8)+"px"
+                p.style.top = (mouseY-95)+"px" 
+                console.log(mouseX,mouseY)
+                x =Math.floor(Math.random()*255)
+                y = Math.floor(Math.random()*255)
+                z = Math.floor(Math.random()*255)
+                if(shape.value == "square"){
+                   p.className = "content"
+                   p.style.background = "rgb("+x+","+y+","+z+")"
+                }
+                else if(shape.value == "circle"){
+                    p.className = "content2"
+                    p.style.background = "rgb("+x+","+y+","+z+")"
+                }
+                else if(shape.value =="triangle"){
+                    p.className=  "content3"
+                    p.style.borderBottomColor = "rgb(" + x + "," + y + "," + z + ")"
+                }
+                else if(shape.value =="inverted-triangle"){
+                    p.className=  "content4"
+                    p.style.borderBottomColor = "rgb(" + x + "," + y + "," + z + ")"
+                }
+                else if(shape.value == "mixed"){
+                    if(shapeselector ==0){
+                        p.className = "content4"
+                        p.style.background = "rgb("+x+","+y+","+z+")"
+                    }
+                    else if(shapeselector == 1){
+                        p.className = "content2"
+                        p.style.background = "rgb("+x+","+y+","+z+")"
+                    }
+                    else if(shapeselector ==2){
+                        p.className=  "content3"
+                        p.style.borderBottomColor = "rgb(" + x + "," + y + "," + z + ")";
+                    }
+                    else if(shapeselector ==3){
+                        p.className=  "content4"
+                        p.style.borderBottomColor = "rgb(" + x + "," + y + "," + z + ")";
+                    }
+                }
+                console.log(x+" "+y+" "+z)
+                console.log("working") 
+                timecontrol =  timenow
+        }
+        }
+    })
+    button.addEventListener("click",()=>{
+                 while(main.firstChild){
+                    main.removeChild(main.firstChild)
+                 }
+            })
+</script>
+</html>
