@@ -1,0 +1,65 @@
+body{
+            background-color: aliceblue;
+        }
+        #main{
+            position: absolute;
+            left: 0%;
+            top: 6%;
+            width: 100% ;
+            height: 94%;
+            max-width: 100%;
+            max-height: 95%;
+            background-color: rgb(34, 34, 34);
+        }
+        .content{
+            position:absolute;
+            width: 20px;
+            height: 20px;
+        }
+        .content2{
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            border-radius: 15px 15px 15px 15px;
+        }
+        .content3{
+            position:absolute;
+            width: 0;
+	        height: 0;
+	        border-left: 12.5px solid transparent;
+	        border-right: 12.5px solid transparent;
+	        border-bottom: 25px solid blue;
+        }
+        .content4{
+            position:absolute;
+            width: 0;
+	        height: 0;
+	        border-left: 15.5px solid transparent;
+	        border-right: 15.5px solid transparent;
+	        border-bottom: 26.5px solid blue;
+            transform: rotate(60deg);
+        }
+        #button{
+            position: absolute;
+            text-align: center;
+            top: 0.9%;
+            left: 10%;
+            width: 90px;
+            height: 32px;
+            border : 4px solid rgb(60, 124, 97);
+            color: rgb(61, 67, 67);
+            border-radius: 10px 10px 10px 10px ;
+            font-style: cursive;
+        }
+        button:hover{
+            cursor: pointer;
+            transition: 1s;
+            background-color: rgb(91, 255, 195);
+        }
+        #shape{
+            position: absolute;
+            top: 0.95%;
+            height: 30px;
+            text-align: center;
+            cursor: pointer;
+        }
